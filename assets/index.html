@@ -43,8 +43,7 @@ elm.ports.peerConnect.subscribe(function(id) {
 function join(id) {
     conn = peer.connect(id);
     conn.on('open', function() {
-        console.log("Conn Open");
-        elm.ports.connectSuccess.send(null);
+        elm.ports.connectSuccess.send("X");
 
         conn.on('data', function(data) {
             //console.log('Received', data);
@@ -65,11 +64,10 @@ peer.on('open', function(id) {
 peer.on('connection', function(c) {
      conn = c;
      conn.on('open', function() {
-        console.log("Conn Open");
-        elm.ports.connectSuccess.send(null);
+        elm.ports.connectSuccess.send("Y");
 
         conn.on('data', function(data) {
-            console.log('Received', data);
+            //console.log('Received', data);
             elm.ports.messageReceiver.send(data);
         });
     });
